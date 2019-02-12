@@ -31,6 +31,14 @@ void BME680::setup()
 const char* BME680::loop()
 {
 	memset(m_sendBuffer, 0, sizeof(m_sendBuffer));
+	/**
+	 * iaqAccuracy - indicates the confidence level of the algorithm's IAQ output. 0 standing for no confidence and 3 standing for the highest.
+	 * IAQ - ranges from 0 (clean air) to 500 (heavily polluted air). During operation,
+	 * automatically calibrate and adapt themselves to the typical environments where the sensor is
+	 * (e.g., home, workplace, inside a car, etc.).This automatic background calibration ensures that users
+	 * consistent IAQ performance. The calibration process considers the recent measurement history (typ. up to
+	 * days) to ensure that IAQ=25 corresponds to typical good air and IAQ=250 indicates typical polluted air.
+	 */
 	if (m_iaqSensor.run()) // new data available
 	{
 		snprintf(m_sendBuffer, sizeof(m_sendBuffer),

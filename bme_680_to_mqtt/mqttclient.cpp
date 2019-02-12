@@ -37,7 +37,7 @@ void MQTTClient::loop(const char* sendBuffer)
 	m_MQTTclient.loop();
 
 	long now = millis() / 1000;
-	if (now - m_lastMsg > 10)
+	if (now - m_lastMsg > 3600)
 	{
 		m_lastMsg = now;
 		int msgLen = strlen(sendBuffer);

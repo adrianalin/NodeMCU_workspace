@@ -12,6 +12,7 @@ in Arduino IDE (i used version 1.8.8 )
 5. follow the instructions about the linker from the https://github.com/BoschSensortec/BSEC-Arduino-library
 
 Wires connection between NodeMcu and bme680:
+Arduino I2C Wire library, I2C pins for SDA and SCL defaults to pins GPIO4 and GPIO5.
 
 BME680    ESP8266 version 12E
 GND------GND

@@ -45,12 +45,11 @@ const char* BME680::loop()
 			"{\"IAQ_Accuracy\": \"%d\",\"IAQ\":\"%.1f\""
 			",\"Temperature\": \"%.1f\",\"Humidity\": \"%.1f\",\"Pressure\": \"%.0f\""
 			",\"CO2\": \"%.0f\""
-			",\"Status\": \"%d\"}",
+			",\"Status\": \"%d\"}\r\n",
 			m_iaqSensor.iaqAccuracy, m_iaqSensor.iaqEstimate,
 			m_iaqSensor.temperature, m_iaqSensor.humidity, m_iaqSensor.pressure / 100,
 			m_iaqSensor.co2Equivalent,
 			m_iaqSensor.status);
-		strcat(m_sendBuffer, "\r\n");
 		Serial.print(String("bme680 - ") + String(m_sendBuffer));
 	}
 	else

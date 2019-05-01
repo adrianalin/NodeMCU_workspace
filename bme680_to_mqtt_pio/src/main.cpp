@@ -12,7 +12,7 @@ void setup()
 	Serial.begin(115200);
 	delay(10);
 
-	Utils::setupWiFi();
+	Utils::loopWiFi();
 	Utils::setupLed();
 	mqttclient.setup();
 	bme680_dev.setup();
@@ -26,5 +26,6 @@ void loop()
 	{
 		mqttclient.loop(message);
 	}
+	Utils::loopWiFi();
 	update.loop();
 }

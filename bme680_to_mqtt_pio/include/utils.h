@@ -18,27 +18,24 @@ namespace Utils
 		digitalWrite(LED_BUILTIN, HIGH);
 	}
 
-	static void setupWiFi()
+	static bool loopWiFi()
 	{
-		// We start by connecting to a WiFi network
-		Serial.println();
-		Serial.print("Connecting to ");
-		Serial.println(Utils::SSID);
-
-		WiFi.mode(WIFI_STA);
-		WiFi.begin(Utils::SSID.c_str(), Utils::SSID_PASS.c_str());
-		while (WiFi.status() != WL_CONNECTED)
+		if (WiFi.status() != WL_CONNECTED)
 		{
-			delay(500);
-			Serial.print(".");
+			// We start by connecting to a WiFi network
+			Serial.println();
+			Serial.print("Connecting to ");
+			Serial.println(Utils::SSID);
+
+			WiFi.mode(WIFI_STA);
+			WiFi.begin(Utils::SSID.c_str(), Utils::SSID_PASS.c_str());
+			delay(5000);
+			Serial.println("IP address: ");
+			Serial.println(WiFi.localIP());
+			randomSeed(micros());
+			return false;
 		}
-
-		randomSeed(micros());
-
-		Serial.println("");
-		Serial.println("WiFi connected");
-		Serial.println("IP address: ");
-		Serial.println(WiFi.localIP());
+		return true;
 	}
 	// you need to fill in your data
 	static const String SSID;   // cannot be longer than 32 characters!

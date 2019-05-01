@@ -12,6 +12,7 @@ void MQTTClient::loop(const char* sendBuffer)
 	if (!m_MQTTclient.connected())
 	{
 		reconnect();
+		return;
 	}
 	m_MQTTclient.loop();
 
@@ -34,25 +35,21 @@ void MQTTClient::loop(const char* sendBuffer)
 
 void MQTTClient::reconnect()
 {
-	// Loop until we're reconnected
-	while (!m_MQTTclient.connected())
+	Serial.print("Attempting MQTT connection...");
+	// Create a random client ID
+	String clientId = "ESP8266Client-";
+	clientId += String(random(0xffff), HEX);
+	// Attempt to connect
+	if (m_MQTTclient.connect(clientId.c_str()))
 	{
-		Serial.print("Attempting MQTT connection...");
-		// Create a random client ID
-		String clientId = "ESP8266Client-";
-		clientId += String(random(0xffff), HEX);
-		// Attempt to connect
-		if (m_MQTTclient.connect(clientId.c_str()))
-		{
-			Serial.println("connected");
-		}
-		else
-		{
-			Serial.print("failed, rc=");
-			Serial.print(m_MQTTclient.state());
-			Serial.println(" try again in 5 seconds");
-			// Wait 5 seconds before retrying
-			delay(5000);
-		}
+		Serial.println("connected");
+	}
+	else
+	{
+		Serial.print("failed, rc=");
+		Serial.print(m_MQTTclient.state());
+		Serial.println(" try again in 5 seconds");
+		// Wait 5 seconds before retrying
+		delay(5000);
 	}
 }

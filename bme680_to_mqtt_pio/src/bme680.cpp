@@ -3,6 +3,7 @@
 
 void BME680::setup()
 {
+	Wire.begin();
 	m_iaqSensor.begin(BME680_I2C_ADDR_SECONDARY, Wire);
 	m_output = "\nBSEC library version " + String(m_iaqSensor.version.major)
 			+ "." + String(m_iaqSensor.version.minor)
@@ -46,7 +47,7 @@ const char* BME680::loop()
 			",\"Temperature\": \"%.1f\",\"Humidity\": \"%.1f\",\"Pressure\": \"%.0f\""
 			",\"CO2\": \"%.0f\""
 			",\"Status\": \"%d\"}\r\n",
-			m_iaqSensor.iaqAccuracy, m_iaqSensor.iaqEstimate,
+			m_iaqSensor.iaqAccuracy, m_iaqSensor.iaqAccuracy,
 			m_iaqSensor.temperature, m_iaqSensor.humidity, m_iaqSensor.pressure / 100,
 			m_iaqSensor.co2Equivalent,
 			m_iaqSensor.status);

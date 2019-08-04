@@ -1,8 +1,5 @@
 """BME680 Temperature, Pressure, Humidity & Gas Sensor."""
-from .constants import lookupTable1, lookupTable2
-from .constants import BME680Data
 from .constants import *
-from . import constants
 import math
 import time
 

@@ -1,4 +1,3 @@
-import gc
 import bme680
 from machine import Pin, I2C
 from bme680.i2c import I2CAdapter

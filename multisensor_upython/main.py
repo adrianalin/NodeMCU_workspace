@@ -1,6 +1,6 @@
 import bme680
 from machine import Pin, I2C
-from bme680.i2c import I2CAdapter
+from i2c import I2CAdapter
 import time
 
 # construct an I2C bus
